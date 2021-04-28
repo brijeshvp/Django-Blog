@@ -36,20 +36,33 @@
           </ul>
           <form method="get" action="/search"class="form-inline my-2 my-lg-0 mx-3">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query" id="query">
-            <button class="btn btn-outline-primary my-2 my-sm-0 " type="submit">Search</button>
+            <button class="btn btn-outline-success my-2 my-sm-0 " type="submit">Search</button>
+            <a href="/admin" role="button" target="_blank" class="btn btn-outline-success m-2 my-sm-0"> Admin Panel </a>
           </form>
 
                <!-- Button to  trigger SignUp modal -->
 
+{% if user.is_authenticated %}
+<ul class="navbar-nav mr-2">
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" href='#' id="navbarDropdown" role="button" data-toggle="dropdown"> Welcome {{request.user}}</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/logout">Logout</a>
+
+        </div>
+      </li>
+      </ul>
+      </div>
+{% else %}
   <!-- Button to  trigger Login modal -->
-<button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#loginModal">
+<button type="button" class="btn btn-success mr-2" data-toggle="modal" data-target="#loginModal">
 Login
 </button>
 
-<button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#signupModal">
+<button type="button" class="btn btn-success mr-2" data-toggle="modal" data-target="#signupModal">
 SignUp
 </button>
-
+{% endif %}
 
         </div>
       </nav>
@@ -80,27 +93,27 @@ SignUp
         <form action= "/signup" method='post'>
   <div class="form-group">
     <label for="username">Username</label>
-    <input type="text" class="form-control" id="username" name="username" placeholder="Choose a unique username">
+    <input type="text" class="form-control" id="username" name="username" placeholder="Choose a unique username" required>
   </div>
   <div class="form-group">
     <label for="fname">First Name</label>
-    <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter Your First Name">
+    <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter Your First Name" required>
   </div>
   <div class="form-group">
     <label for="lname">Last Name</label>
-    <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter Your Last Name">
+    <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter Your Last Name" required>
   </div>
   <div class="form-group">
     <label for="email">Email address</label>
-    <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+    <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
   </div>
   <div class="form-group">
     <label for="pass1">Choose a password</label>
-    <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Choose Your Password">
+    <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Choose Your Password" required>
   </div>
   <div class="form-group">
     <label for="pass2">Confirm Password</label>
-    <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Enter your password again">
+    <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Enter your password again" required>
   </div>
  
 
@@ -132,14 +145,14 @@ SignUp
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form action="/login" method="POST"> {% csrf_token %}
   <div class="form-group">
     <label for="username">Username</label>
-    <input type="text" class="form-control" id="loginusername" name="loginusername" placeholder="Choose a unique username">
+    <input type="text" class="form-control" id="loginusername" name="loginusername" placeholder="Enter your username "required>
   </div>
   <div class="form-group">
     <label for="pass">Enter your password </label>
-    <input type="password" class="form-control" id="pass" name="pass" placeholder="Enter your password ">
+    <input type="password" class="form-control" id="loginpassword" name="loginpassword" placeholder="Enter your password "required>
   </div>
  
         <button type="submit" class="btn btn-primary">Submit</button>
