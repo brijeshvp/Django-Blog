@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+
 from pathlib import Path
 import os
 from django.contrib.messages import constants as messages
@@ -24,27 +25,37 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'f9kr_o=9na561rufe&e%i-gs^g22(pz2(yz)z4c$_@vrbn30vf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True  # for development
+DEBUG = False   #to deploy on heroku
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []    # for development
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']     #to deploy on heroku
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    # for deploying on heroku
+    'whitenoise.runserver_nostatic',
+    'django.contrib.staticfiles',
+    ###################################
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
     #Registered apps by me(for my project)
     'home.apps.HomeConfig', 
     'blog.apps.BlogConfig',
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
+    
+    # for deploying on heroku
+     'django.middleware.security.SecurityMiddleware',
+ 'whitenoise.middleware.WhiteNoiseMiddleware',
+
+    # 'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -79,10 +90,21 @@ WSGI_APPLICATION = 'blog_proj.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': '<database_name>',
+        'USER': '<user_name>',
+        'PASSWORD': '<password>',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
@@ -128,3 +150,6 @@ STATIC_URL = '/static/'
 MESSAGE_TAGS = {
     messages.ERROR:'danger'
 }
+
+import django_heroku
+django_heroku.settings(locals())
