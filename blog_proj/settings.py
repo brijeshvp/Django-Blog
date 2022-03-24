@@ -29,15 +29,15 @@ SECRET_KEY = 'f9kr_o=9na561rufe&e%i-gs^g22(pz2(yz)z4c$_@vrbn30vf'
 DEBUG = False   #to deploy on heroku
 
 # ALLOWED_HOSTS = []    # for development
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']     #to deploy on heroku
+ALLOWED_HOSTS = ['127.0.0.1', 'blog-techbuzz.herokuapp.com']     #to deploy on heroku
 
 
 # Application definition
 
 INSTALLED_APPS = [
     # for deploying on heroku
-    'whitenoise.runserver_nostatic',
-    'django.contrib.staticfiles',
+    # 'whitenoise.runserver_nostatic',
+    # 'django.contrib.staticfiles',
     ###################################
     'django.contrib.admin',
     'django.contrib.auth',
@@ -53,7 +53,7 @@ MIDDLEWARE = [
     
     # for deploying on heroku
      'django.middleware.security.SecurityMiddleware',
- 'whitenoise.middleware.WhiteNoiseMiddleware',
+#  'whitenoise.middleware.WhiteNoiseMiddleware',
 
     # 'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -88,23 +88,23 @@ WSGI_APPLICATION = 'blog_proj.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '<database_name>',
-        'USER': '<user_name>',
-        'PASSWORD': '<password>',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': '<database_name>',
+#         'USER': '<user_name>',
+#         'PASSWORD': '<password>',
+#         'HOST': 'localhost',
+#         'PORT': '',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # Password validation
@@ -151,5 +151,5 @@ MESSAGE_TAGS = {
     messages.ERROR:'danger'
 }
 
-import django_heroku
-django_heroku.settings(locals())
+# import django_heroku
+# django_heroku.settings(locals())
