@@ -37,7 +37,7 @@ ALLOWED_HOSTS = ['127.0.0.1', 'blog-techbuzz.herokuapp.com']     #to deploy on h
 INSTALLED_APPS = [
     # for deploying on heroku
     'whitenoise.runserver_nostatic',
-    # 'django.contrib.staticfiles',
+    'django.contrib.staticfiles',
     ###################################
     'django.contrib.admin',
     'django.contrib.auth',
