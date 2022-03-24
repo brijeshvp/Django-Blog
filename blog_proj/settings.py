@@ -36,7 +36,7 @@ ALLOWED_HOSTS = ['127.0.0.1', 'blog-techbuzz.herokuapp.com']     #to deploy on h
 
 INSTALLED_APPS = [
     # for deploying on heroku
-    # 'whitenoise.runserver_nostatic',
+    'whitenoise.runserver_nostatic',
     # 'django.contrib.staticfiles',
     ###################################
     'django.contrib.admin',
@@ -52,8 +52,8 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     
     # for deploying on heroku
-     'django.middleware.security.SecurityMiddleware',
- 'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 
     # 'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
